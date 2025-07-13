@@ -6,7 +6,10 @@
     "build": "react-router build",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc"
+    "typecheck": "react-router typegen && tsc",
+    "biome:write": "npm run biome:write-lint && npm run biome:write-format",
+    "biome:write-format": "npx @biomejs/biome format --write ./app",
+    "biome:write-lint": "npx @biomejs/biome lint --write ./app"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
