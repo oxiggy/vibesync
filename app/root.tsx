@@ -1,7 +1,17 @@
 import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
+import { ClerkProvider, useClerk } from '@clerk/clerk-react'
+import { JazzReactProviderWithClerk } from 'jazz-tools/react'
 
 import type { Route } from './+types/root'
 import './app.css'
+
+const PUBLIC_CLERK_KEY = import.meta.env.PUBLIC_CLERK_KEY
+
+if (!PUBLIC_CLERK_KEY) {
+	throw new Error('Add your Clerk publishable key to the .env.local file')
+}
+
+const PUBLIC_JAZZ_KEY = import.meta.env.PUBLIC_JAZZ_KEY
 
 export const links: Route.LinksFunction = () => [
 	{ rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -35,7 +45,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-	return <Outlet />
+	return (
+		<ClerkProvider publishableKey={PUBLIC_CLERK_KEY} afterSignOutUrl="/">
+			<JazzProvider />
+		</ClerkProvider>
+	)
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
@@ -61,5 +75,20 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 				</pre>
 			)}
 		</main>
+	)
+}
+
+function JazzProvider() {
+	const clerk = useClerk()
+
+	return (
+		<JazzReactProviderWithClerk
+			clerk={clerk}
+			sync={{
+				peer: `wss://cloud.jazz.tools/?key=${PUBLIC_JAZZ_KEY}`,
+			}}
+		>
+			<Outlet />
+		</JazzReactProviderWithClerk>
 	)
 }
