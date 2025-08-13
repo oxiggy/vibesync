@@ -1,6 +1,7 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { useTranslation } from 'react-i18next'
 
-const steps = [{ name: 'Step 1' }, { name: 'Step 2' }, { name: 'Step 3' }]
+const steps = [{ name: '#1' }, { name: '#2' }, { name: '#3' }]
 
 const users = [
 	{ id: '1', nickname: 'User 1' },
@@ -11,6 +12,8 @@ const users = [
 ]
 
 export default function ActualAnswers() {
+	const { t } = useTranslation('game')
+
 	return (
 		<div className="space-y-4">
 			{steps.map((step) => (
@@ -18,7 +21,7 @@ export default function ActualAnswers() {
 					<p>{step.name}</p>
 					<Select>
 						<SelectTrigger className="w-full">
-							<SelectValue placeholder="Select an answer" />
+							<SelectValue placeholder={t('selectPlaceholder')} />
 						</SelectTrigger>
 						<SelectContent>
 							{users.map((user) => (

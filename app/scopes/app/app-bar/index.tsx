@@ -4,8 +4,10 @@ import ThemeSelect from 'app/scopes/app/theme-select'
 import LangSelect from '@/scopes/app/lang-select'
 import { useIsAuthenticated } from 'jazz-tools/react'
 import { SignInButton, SignOutButton } from '@clerk/clerk-react'
+import { useTranslation } from 'react-i18next'
 
 export default function AppBar() {
+	const { t } = useTranslation('common')
 	const isAuthenticated = useIsAuthenticated()
 
 	return (
@@ -17,7 +19,7 @@ export default function AppBar() {
 
 			{isAuthenticated && <AccountMenu />}
 
-			{isAuthenticated ? <SignOutButton>Logout</SignOutButton> : <SignInButton />}
+			{isAuthenticated ? <SignOutButton>{t('button.logout')}</SignOutButton> : <SignInButton>{t('button.login')}</SignInButton>}
 		</div>
 	)
 }
