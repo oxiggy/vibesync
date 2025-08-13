@@ -1,0 +1,31 @@
+{
+  "title": "vibesync",
+  "button": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "submit": "Submit",
+    "skip": "Skip",
+    "login": "Log in",
+    "logout": "Log out"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "error": {
+    "notFound": "Page not found",
+    "serverError": "Server error, please try again later",
+
+    "empty": "This field is required",
+    "invalid": "Must be a valid link",
+    "list": "Playlist links are not allowed",
+    "duplicateUsers": "Duplicate users found"
+  },
+  "success": {
+    "saved": "Changes saved successfully",
+    "deleted": "Item deleted successfully"
+  }
+}

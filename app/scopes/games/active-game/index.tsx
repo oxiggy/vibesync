@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Stepper from '@/components/Stepper'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { useTranslation } from 'react-i18next'
 
 import ActualAnswers from '@/scopes/games/actual-answers'
 
@@ -18,6 +19,7 @@ const users = [
 ]
 
 export default function ActiveGame() {
+	const { t } = useTranslation(['game', 'common'])
 	const [selectedUser, setSelectedUser] = useState<string | null>(null)
 
 	return (
@@ -38,13 +40,13 @@ export default function ActiveGame() {
 							</Badge>
 						))}
 					</div>
-					<Button className="">Skip step</Button>
+					<Button className="">{t('common:button.skip')}</Button>
 				</div>
 			</div>
 
 			<div>
-				<p className="mb-1 text-lg font-semibold">Your answers</p>
-				<p className="mb-4 text-xs text-muted-foreground">Duplicate users found</p>
+				<p className="mb-1 text-lg font-semibold">{t('answers')}</p>
+				<p className="mb-4 text-xs text-muted-foreground">{t('common:error.duplicateUsers')}</p>
 
 				<ActualAnswers />
 			</div>

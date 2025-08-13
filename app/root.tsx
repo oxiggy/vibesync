@@ -1,9 +1,11 @@
 import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
 import { ClerkProvider, useClerk } from '@clerk/clerk-react'
 import { JazzReactProviderWithClerk } from 'jazz-tools/react'
+import './locales'
 
 import type { Route } from './+types/root'
 import './app.css'
+import { LanguageHtmlSync } from '@/locales/LanguageHtmlSync'
 
 const PUBLIC_CLERK_KEY = import.meta.env.PUBLIC_CLERK_KEY
 
@@ -48,6 +50,7 @@ export default function App() {
 	return (
 		<ClerkProvider publishableKey={PUBLIC_CLERK_KEY} afterSignOutUrl="/">
 			<JazzProvider />
+			<LanguageHtmlSync />
 		</ClerkProvider>
 	)
 }

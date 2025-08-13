@@ -1,0 +1,6 @@
+{
+  "creator": "Автор: {{name}}",
+  "date": "Дата: {{date}}",
+  "players": "Игроки: {{count}}",
+  "answerPlaceholder": "Ответьте здесь"
+}

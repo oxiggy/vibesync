@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Progress } from '@/components/ui/progress'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import MediaPreview from '@/components/MediaPreview'
 import { isValidUrl, isYouTubePlaylist } from '@/utils/helpers'
+import { useTranslation } from 'react-i18next'
 
 const questions = [
 	{ question: 'What is your favorite meme image?' },
@@ -13,15 +14,18 @@ const questions = [
 	{ question: 'What is a short you liked?' },
 ]
 
-const errorText = {
-	empty: 'This field is required',
-	invalid: 'Must be a valid link',
-	list: 'Playlist links are not allowed',
-}
-
 export default function Form() {
+	const { t } = useTranslation(['form', 'common'])
 	const [answers, setAnswers] = useState<string[]>(Array(questions.length).fill(''))
 	const [errors, setErrors] = useState<string[]>(Array(questions.length).fill(''))
+
+	const errorText = useMemo(() => {
+		return {
+			empty: t('common:error.empty'),
+			invalid: t('common:error.invalid'),
+			list: t('common:error.list'),
+		}
+	}, [t])
 
 	const validate = (value: string): string => {
 		if (value.trim() === '') return errorText.empty
@@ -46,7 +50,7 @@ export default function Form() {
 
 		const hasErrors = newErrors.some((e) => e !== '')
 		if (!hasErrors) {
-			alert('Answers saved!')
+			alert(t('common:success.saved'))
 		}
 	}
 
@@ -58,9 +62,9 @@ export default function Form() {
 			<Progress value={progress} />
 			<p className="mb-2 mt-5 text-2xl">BestGamers sync v1</p>
 			<div className="mb-8 space-x-6 text-sm text-primary/70">
-				<span>Creator: UserName2</span>
-				<span>Date: 2026/01/11</span>
-				<span>Players: 12</span>
+				<span>{t('creator', { name: 'UserName2' })}</span>
+				<span>{t('date', { date: '2026/01/11' })}</span>
+				<span>{t('players', { count: 12 })}</span>
 			</div>
 
 			<div className="space-y-8">
@@ -68,7 +72,7 @@ export default function Form() {
 					<div key={item.question} className="grid grid-cols-2 gap-8">
 						<div className="space-y-2">
 							<div className="font-semibold">{item.question}</div>
-							<Input type="text" placeholder="Your answer" className="border p-2 w-full" value={answers[index]} onChange={(e) => handleInputChange(index, e.target.value)} />
+							<Input type="text" placeholder={t('answerPlaceholder')} className="border p-2 w-full" value={answers[index]} onChange={(e) => handleInputChange(index, e.target.value)} />
 							{errors[index] && <div className="text-xs text-red-500">{errors[index]}</div>}
 						</div>
 
@@ -78,7 +82,7 @@ export default function Form() {
 			</div>
 
 			<Button className="w-full mt-8" disabled={progress !== 100} onClick={handleSave}>
-				Save
+				{t('common:button.submit')}
 			</Button>
 		</div>
 	)

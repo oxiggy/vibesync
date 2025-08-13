@@ -1,0 +1,6 @@
+{
+  "creator": "Creator: {{name}}",
+  "date": "Date: {{date}}",
+  "players": "Players: {{count}}",
+  "answerPlaceholder": "Your answer here"
+}
