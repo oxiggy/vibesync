@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
+import type React from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { InputWithLang } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 
@@ -8,15 +9,13 @@ type Question = { id: number; title: LangText }
 export default function CreateGame() {
 	const [gameName, setGameName] = useState<LangText>({ ru: '', en: '' })
 	const [questions, setQuestions] = useState<Question[]>([])
-
 	const idRef = useRef(1)
-	const nextId = () => idRef.current++
-
-	const createEmptyQuestion = (): Question => ({ id: nextId(), title: { ru: '', en: '' } })
+	const nextId = useCallback(() => idRef.current++, [])
+	const createEmptyQuestion = useCallback((): Question => ({ id: nextId(), title: { ru: '', en: '' } }), [nextId])
 
 	useEffect(() => {
 		if (questions.length === 0) setQuestions([createEmptyQuestion()])
-	}, [])
+	}, [questions, createEmptyQuestion])
 
 	const handleQuestionTitleChange = (idx: number, lang: keyof LangText, value: string) => {
 		setQuestions((prev) => {
