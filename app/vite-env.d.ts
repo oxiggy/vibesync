@@ -7,6 +7,7 @@ interface ViteTypeOptions {
 interface ImportMetaEnv {
 	readonly PUBLIC_CLERK_KEY: string
 	readonly PUBLIC_JAZZ_KEY: string
+	readonly PUBLIC_JAZZ_WORKER_ACCOUNT: string
 }
 
 interface ImportMeta {

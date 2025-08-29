@@ -2,21 +2,13 @@ import type * as React from 'react'
 
 import { cn } from '@/utils/tailwind'
 
-type InputProps = React.ComponentProps<'input'> & { lang?: 'ru' | 'en' | undefined}
+type InputProps = React.ComponentProps<'input'> & { lang?: 'ru' | 'en' | undefined }
 
 function InputWithLang({ className, lang, ...props }: InputProps) {
 	return (
-		<div className='relative w-full'>
-			<div className='absolute left-2 top-1/2 -translate-y-1/2 select-none rounded-sm bg-muted px-1.5 py-0.5 text-xs font-medium tabular-nums'>
-				{lang}
-			</div>
-			<Input
-				className={cn(
-					lang ? 'pl-10' : '',
-					className,
-				)}
-				{...props}
-			/>
+		<div className="relative w-full">
+			<div className="absolute left-2 top-1/2 -translate-y-1/2 select-none rounded-sm bg-muted px-1.5 py-0.5 text-xs font-medium tabular-nums">{lang}</div>
+			<Input className={cn(lang ? 'pl-10' : '', className)} {...props} />
 		</div>
 	)
 }

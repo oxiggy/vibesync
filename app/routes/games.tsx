@@ -1,5 +1,5 @@
-import { Outlet } from 'react-router'
+import { Games } from '@/scopes/games/Games'
 
 export default function GamesPage() {
-	return <Outlet />
+	return <Games />
 }

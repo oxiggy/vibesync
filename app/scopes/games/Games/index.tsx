@@ -1,43 +1,50 @@
 import { useAccount } from 'jazz-tools/react'
-import { AppAccount, Game } from '@/schema'
-import { Group } from 'jazz-tools'
+import { AppAccount } from '@/schema'
+import { Page } from '@/components/ui/page'
+import { NavLink, useNavigate } from 'react-router'
+import { CreateGameDialog } from './CreateGameDialog'
+import { DeleteGameDialog } from '@/scopes/games/Games/DeleteGameDialog'
 
 export const Games = () => {
 	const { me } = useAccount(AppAccount, {
 		resolve: { root: { games: { $each: {} } } },
 	})
 
+	const navigate = useNavigate()
+
+	if (!me) {
+		return <div>Loading...</div>
+	}
+
 	return (
-		<div className="px-6 py-4">
-			<h1 className="text-2xl">Games</h1>
+		<Page>
+			<h1 className="text-3xl font-bold">Games</h1>
 
 			<ul className="py-4">
 				{me?.root.games.map((game, i) => (
-					<li key={game.id} className="flex justify-between py-2">
+					<li key={game.$jazz.id} className="relative flex justify-between py-2">
 						{game.title}
 
-						<button
-							type="button"
-							onClick={() => {
-								me?.root.games.splice(i, 1)
-							}}
-						>
-							DELETE
-						</button>
+						<NavLink className="absolute inset-0" to={game.$jazz.id} />
+
+						<div className="relative">
+							<DeleteGameDialog
+								game={game}
+								onDelete={() => {
+									me.root.games.$jazz.splice(i, 1)
+								}}
+							/>
+						</div>
 					</li>
 				))}
 			</ul>
 
-			<button
-				type="button"
-				onClick={() => {
-					const owner = Group.create()
-					const game = Game.create({ title: 'New Game' }, { owner })
-					me?.root.games.push(game)
+			<CreateGameDialog
+				onCreated={(game) => {
+					me.root.games.$jazz.push(game)
+					navigate(game.$jazz.id)
 				}}
-			>
-				CREATE
-			</button>
-		</div>
+			/>
+		</Page>
 	)
 }
