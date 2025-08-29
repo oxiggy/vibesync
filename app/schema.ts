@@ -1,22 +1,17 @@
 import { co, z } from 'jazz-tools'
 
-export const Game = co.map({
+export const ProfileSchema = co.profile()
+
+export const GameSchema = co.map({
 	title: z.string(),
+	owner: co.account(),
 })
 
 export const AppRoot = co.map({
-	games: co.list(Game),
+	games: co.list(GameSchema),
 })
 
-export const AppAccount = co
-	.account({
-		profile: co.profile(),
-		root: AppRoot,
-	})
-	.withMigration(async (account) => {
-		if (account.root === undefined) {
-			account.root = AppRoot.create({
-				games: co.list(Game).create([], { owner: account }),
-			})
-		}
-	})
+export const AppAccount = co.account({
+	profile: ProfileSchema,
+	root: AppRoot,
+})
