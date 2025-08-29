@@ -1,5 +1,5 @@
 import { useAccount } from 'jazz-tools/react'
-import { AppAccount } from '@/schema'
+import { AppAccount } from '@/jazz/schema'
 import { Page } from '@/components/ui/page'
 import { NavLink, useNavigate } from 'react-router'
 import { CreateGameDialog } from './CreateGameDialog'

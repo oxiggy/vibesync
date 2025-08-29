@@ -1,6 +1,6 @@
 import { startWorker } from 'jazz-tools/worker'
 import { co } from 'jazz-tools'
-import { AppRoot } from '@/schema'
+import { AppRoot } from '@/jazz/schema'
 
 export const WorkerAccount = co.account({
 	profile: co.profile(),
