@@ -1,5 +1,5 @@
 import { useId, useState } from 'react'
-import type { GameSchema } from '@/schema'
+import type { GameSchema } from '@/jazz/schema'
 import { useMutation } from '@tanstack/react-query'
 import { createGameRequest } from '@/jazz/requests/game/create'
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'

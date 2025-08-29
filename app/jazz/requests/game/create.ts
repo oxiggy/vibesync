@@ -1,5 +1,5 @@
 import { experimental_defineRequest, z } from 'jazz-tools'
-import { GameSchema } from '@/schema'
+import { GameSchema } from '@/jazz/schema'
 
 const workerId = import.meta.env.PUBLIC_JAZZ_WORKER_ACCOUNT
 

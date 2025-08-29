@@ -1,7 +1,7 @@
 import type { Route } from './+types/create'
 import { Group } from 'jazz-tools'
 import { jazz } from '@/server/jazz'
-import { GameSchema, AppAccount } from '@/schema'
+import { GameSchema, AppAccount } from '@/jazz/schema'
 import { createGameRequest } from '@/jazz/requests/game/create'
 
 export const action = async ({ request }: Route.ActionArgs) => {
