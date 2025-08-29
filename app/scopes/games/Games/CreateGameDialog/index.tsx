@@ -1,12 +1,12 @@
 import { useId, useState } from 'react'
-import type { GameSchema } from '@/jazz/schema'
+import type { co } from 'jazz-tools'
+import type { GameSchema } from '@/jazz/schema/game'
 import { useMutation } from '@tanstack/react-query'
 import { createGameRequest } from '@/jazz/requests/game/create'
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
-import type { co } from 'jazz-tools'
 
 type CreateGameDialogProps = {
 	onCreated: (game: co.loaded<typeof GameSchema>) => void

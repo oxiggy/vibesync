@@ -1,15 +1,10 @@
-import type { Route } from './+types/home'
-import ActiveGame from '@/scopes/games/active-game'
-import { Page } from '@/components/ui/page'
+import type { Route } from './+types/game'
+import { Game } from '@/scopes/game/Game'
 
 export function meta(_: Route.MetaArgs) {
 	return [{ title: 'Game' }, { name: 'description', content: 'description' }]
 }
 
-export default function GamePage() {
-	return (
-		<Page>
-			<ActiveGame />
-		</Page>
-	)
+export default function GamePage({ params }: Route.ComponentProps) {
+	return <Game id={params.gameId} />
 }

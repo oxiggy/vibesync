@@ -1,7 +1,7 @@
-import type { GameSchema } from '@/jazz/schema'
+import type { co } from 'jazz-tools'
+import type { GameSchema } from '@/jazz/schema/game'
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
-import type { co } from 'jazz-tools'
 
 type DeleteGameDialogProps = {
 	game: co.loaded<typeof GameSchema>

@@ -1,11 +1,7 @@
-import { co, z } from 'jazz-tools'
+import { co } from 'jazz-tools'
+import { GameSchema } from '@/jazz/schema/game'
 
 export const ProfileSchema = co.profile()
-
-export const GameSchema = co.map({
-	title: z.string(),
-	owner: co.account(),
-})
 
 export const AppRoot = co.map({
 	games: co.list(GameSchema),
