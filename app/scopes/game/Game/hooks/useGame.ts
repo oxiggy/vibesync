@@ -6,6 +6,7 @@ export const useGame = (id: string) => {
 		resolve: {
 			owner: { profile: true },
 			players: { $each: { profile: true } },
+			rounds: { $each: true },
 		},
 	})
 }
