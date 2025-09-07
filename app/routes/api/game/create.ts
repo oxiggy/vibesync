@@ -27,13 +27,17 @@ export const action = async ({ request }: Route.ActionArgs) => {
 			{
 				owner: account,
 				title,
+
 				players: {
 					[account.$jazz.id]: {
 						profile: account.profile,
 						status: 'accepted',
 					},
 				},
+
+				rounds: [],
 			},
+
 			group,
 		)
 
